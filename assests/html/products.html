@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .product-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .product-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .product-card h3 {
+      margin: 15px 0 10px;
+      color: #333;
+    }
+
+    .product-card p {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .product-card button {
+      background: #ff6a00;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .product-card button:hover {
+      background: #e85b00;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Our Products</h2>
+    <div class="product-container" id="productContainer"></div>
+    <a href="orders.html">Go to Orders</a>
+  </div>
+
+  <script>
+    async function fetchProducts() {
+      try {
+        const res = await fetch('http://localhost:5000/api/products');
+        const products = await res.json();
+        const container = document.getElementById('productContainer');
+        container.innerHTML = '';
+        products.forEach(p => {
+          const card = document.createElement('div');
+          card.className = 'product-card';
+          card.innerHTML = `
+            <img src="${p.image}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <p>Price: $${p.price}</p>
+            <button onclick="addToOrder(${p.id})">Add to Order</button>
+          `;
+          container.appendChild(card);
+        });
+      } catch(err) {
+        alert('Failed to load products');
+      }
+    }
+
+    async function addToOrder(productId) {
+      try {
+        const res = await fetch('http://localhost:5000/api/orders', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ productId })
+        });
+        const result = await res.json();
+        alert(result.msg);
+      } catch(err) {
+        alert(err.message);
+      }
+    }
+
+    fetchProducts();
+  </script>
+</body>
+</html>

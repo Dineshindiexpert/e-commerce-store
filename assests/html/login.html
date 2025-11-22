@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - eCommerce Store</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+
+<body>
+
+<div class="login-box">
+
+  <h2>Welcome Back</h2>
+  <p class="text-center text-muted mb-4">Login to your account</p>
+
+  <!-- Login Form -->
+  <form id="loginForm">
+    <div class="mb-3 position-relative">
+      <i class="bi bi-envelope input-icon"></i>
+      <input type="email" class="form-control" placeholder="Email Address" required>
+    </div>
+    <div class="mb-3 position-relative">
+      <i class="bi bi-lock input-icon"></i>
+      <input type="password" class="form-control" placeholder="Password" required>
+    </div>
+
+    <div class="text-end mb-3">
+      <a href="#" id="forgotLink" class="text-primary fw-semibold">Forgot Password?</a>
+    </div>
+
+    <button type="submit" class="btn btn-custom w-100">Login</button>
+    <p class="text-center mt-3">
+      Don’t have an account? <a href="./signup.html" class="text-primary fw-bold">Create one</a>
+    </p>
+  </form>
+
+  <!-- Forgot Password Form -->
+  <form id="forgotForm" style="display: none;">
+    <p class="text-center text-muted mb-4">Enter your email to reset password</p>
+    <div class="mb-3 position-relative">
+      <i class="bi bi-envelope input-icon"></i>
+      <input type="email" class="form-control" placeholder="Email Address" required>
+    </div>
+    <button type="button" id="sendOtp" class="btn btn-custom w-100 mb-3">Send OTP</button>
+    <button type="button" id="backToLogin" class="btn btn-outline-secondary w-100">Back to Login</button>
+  </form>
+
+  <!-- OTP Verification Form -->
+  <form id="otpForm" style="display: none;">
+    <p class="text-center text-muted mb-4">Enter the OTP sent to your email</p>
+    <div class="mb-3 position-relative">
+      <i class="bi bi-key input-icon"></i>
+      <input type="text" class="form-control" placeholder="Enter OTP" required>
+    </div>
+    <button type="button" id="verifyOtp" class="btn btn-custom w-100 mb-3">Verify OTP</button>
+    <button type="button" id="resendOtp" class="btn btn-outline-secondary w-100 mb-2">Resend OTP</button>
+  </form>
+
+  <!-- Reset Password Form -->
+  <form id="resetForm" style="display: none;">
+    <p class="text-center text-muted mb-4">Enter your new password</p>
+    <div class="mb-3 position-relative">
+      <i class="bi bi-lock input-icon"></i>
+      <input type="password" class="form-control" placeholder="New Password" required>
+    </div>
+    <div class="mb-3 position-relative">
+      <i class="bi bi-shield-lock input-icon"></i>
+      <input type="password" class="form-control" placeholder="Confirm Password" required>
+    </div>
+    <button type="button" id="resetPasswordBtn" class="btn btn-custom w-100">Reset Password</button>
+  </form>
+
+</div>
+
+<script>
+  const loginForm = document.getElementById('loginForm');
+  const forgotForm = document.getElementById('forgotForm');
+  const otpForm = document.getElementById('otpForm');
+  const resetForm = document.getElementById('resetForm');
+
+  const forgotLink = document.getElementById('forgotLink');
+  const backToLogin = document.getElementById('backToLogin');
+  const sendOtp = document.getElementById('sendOtp');
+  const verifyOtp = document.getElementById('verifyOtp');
+  const resetPasswordBtn = document.getElementById('resetPasswordBtn');
+
+  forgotLink.addEventListener('click', () => {
+    loginForm.style.display = 'none';
+    forgotForm.style.display = 'block';
+  });
+
+  backToLogin.addEventListener('click', () => {
+    forgotForm.style.display = 'none';
+    otpForm.style.display = 'none';
+    resetForm.style.display = 'none';
+    loginForm.style.display = 'block';
+  });
+
+  sendOtp.addEventListener('click', () => {
+    forgotForm.style.display = 'none';
+    otpForm.style.display = 'block';
+    alert('OTP sent to your email!');
+  });
+
+  verifyOtp.addEventListener('click', () => {
+    otpForm.style.display = 'none';
+    resetForm.style.display = 'block';
+    alert('OTP verified successfully!');
+  });
+
+  resetPasswordBtn.addEventListener('click', () => {
+    resetForm.style.display = 'none';
+    loginForm.style.display = 'block';
+    alert('Password reset successfully! You can login now.');
+  });
+  const form = document.getElementById('loginForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        email: form.email.value,
+        password: form.password.value
+      };
+      try {
+        const res = await fetch('http://localhost:5000/api/auth/login', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        alert(result.msg);
+        if(result.msg === "Login successful") {
+          window.location.href = "dashboard.html";
+        }
+      } catch(err) {
+        alert(err.message);
+      }
+    });
+    const form = document.getElementById('forgotForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = { email: form.email.value };
+      try {
+        const res = await fetch('http://localhost:5000/api/auth/forgot-password', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        alert(result.msg);
+        if(result.msg === "OTP sent to your email") {
+          window.location.href = "reset.html?email=" + encodeURIComponent(form.email.value);
+        }
+      } catch(err) {
+        alert(err.message);
+      }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

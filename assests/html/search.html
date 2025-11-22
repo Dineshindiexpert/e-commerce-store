@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results - Exclusive</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-4" href="#">Exclusive</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="./contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="./signup.html">Signup</a></li>
+        </ul>
+        <div class="d-flex gap-3">
+          <i class="bi bi-heart fs-4"></i>
+          <i class="bi bi-cart3 fs-4"></i>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Search Bar -->
+  <div class="container my-4">
+    <form class="position-relative">
+      <input class="form-control form-control-lg pe-5" type="search" placeholder="Search for products...">
+      <img src="../icons/search-icon.svg" class="position-absolute end-0 top-50 translate-middle-y me-3" width="24" alt="Search Icon">
+    </form>
+  </div>
+</header>
+
+<main class="container my-5">
+  <h3 class="mb-4">Related Products</h3>
+  <div class="row g-4">
+    <!-- Product Card Example -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100 shadow-sm product-card">
+        <img src="../images/iphone17pro.jpg" class="card-img-top img-fluid" alt="iPhone 17 Pro">
+        <div class="card-body text-center">
+          <h5 class="card-title">iPhone 17 Pro</h5>
+          <p class="text-muted">$999</p>
+          <button class="btn btn-warning w-100">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100 shadow-sm product-card">
+        <img src="../images/laptop.jpg" class="card-img-top img-fluid" alt="Laptop">
+        <div class="card-body text-center">
+          <h5 class="card-title">Powerful Laptop</h5>
+          <p class="text-muted">$1200</p>
+          <button class="btn btn-warning w-100">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100 shadow-sm product-card">
+        <img src="../images/homeapllinces.jpg" class="card-img-top img-fluid" alt="Home Appliances">
+        <div class="card-body text-center">
+          <h5 class="card-title">Home Appliances</h5>
+          <p class="text-muted">$450</p>
+          <button class="btn btn-warning w-100">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card h-100 shadow-sm product-card">
+        <img src="../images/books.jpg" class="card-img-top img-fluid" alt="Books">
+        <div class="card-body text-center">
+          <h5 class="card-title">Books Collection</h5>
+          <p class="text-muted">$30</p>
+          <button class="btn btn-warning w-100">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-dark text-white text-center py-4 mt-5">
+  &copy; 2025 Exclusive. All Rights Reserved.
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+/* Make carousel images look perfect */
+.carousel-item img {
+  height: 70vh; /* Adjust height for best view */
+  object-fit: cover; /* Prevent image distortion */
+}
+
+/* Make captions easier to read */
+.carousel-caption h5, 
+.carousel-caption p {
+  text-shadow: 0 3px 8px rgba(0,0,0,0.8);
+}
+
+/* Reduce navbar spacing on mobile */
+@media(max-width: 768px) {
+  .carousel-item img {
+    height: 45vh; /* Mobile-friendly height */
+  }
+}
+
+/* --------- Global Fixes ---------- */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Carousel better view */
+.carousel-item img {
+  height: 65vh;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+@media(max-width: 768px) {
+  .carousel-item img {
+    height: 40vh;
+  }
+}
+
+/* Category Cards (Beautiful) */
+.category-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  transition: 0.3s ease;
+  border: 1px solid #eee;
+  cursor: pointer;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.1);
+  border-color: #ddd;
+}
+
+.category-card img {
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.category-card h5 {
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.category-card p {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Product Card Hover */
+.product-card {
+  border-radius: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+.btn-warning {
+  border-radius: 10px;
+  font-weight: 600;
+}

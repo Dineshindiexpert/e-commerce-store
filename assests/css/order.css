@@ -1,0 +1,21 @@
+/* Order Page Cards */
+.card {
+  border-radius: 15px;
+}
+
+.card h5 {
+  font-weight: 600;
+}
+
+.card button {
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.card button:hover {
+  transform: scale(1.05);
+}
+
+main h2 {
+  font-weight: 700;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reset Password</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="form-box">
+    <h2>Reset Password</h2>
+    <form id="resetForm">
+      <input type="number" name="otp" placeholder="Enter OTP" required>
+      <input type="password" name="newPassword" placeholder="New Password" required>
+      <button type="submit">Reset Password</button>
+    </form>
+    <a href="index.html">Back to Login</a>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get('email');
+
+    const form = document.getElementById('resetForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        email: email,
+        otp: form.otp.value,
+        newPassword: form.newPassword.value
+      };
+      try {
+        const res = await fetch('http://localhost:5000/api/auth/verify-otp', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        alert(result.msg);
+        if(result.msg === "Password reset successfully") {
+          window.location.href = "index.html";
+        }
+      } catch(err) {
+        alert(err.message);
+      }
+    });
+  </script>
+</body>
+</html>
